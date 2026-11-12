@@ -1,84 +1,66 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="JLL · OKX EMA 自动交易系统 · 科学部署全流程" />
     <title>JLL · OKX EMA 自动交易系统 · 科学部署全流程</title>
     <style>
-        /* ================= 主题变量配置 ================= */
-        
-        /* 默认（暗金色） - 绑定在 html 根节点上确保绝对生效 */
-        html[data-theme="dark"] {
-            --bg-deep: #0A0908;           /* 深黑底色 */
-            --bg-panel: #141210;          /* 面板黑褐色 */
+        :root {
+            --bg-deep: #0A0908;
+            --bg-panel: #141210;
             --bg-sub-item: rgba(212, 175, 55, 0.03);
             --bg-sub-item-hover: rgba(212, 175, 55, 0.08);
-            
-            --gold-bright: #F5D061;       /* 亮金色文字 */
-            --gold-metallic: #B8860B;     /* 暗金色边框 */
+            --gold-bright: #F5D061;
+            --gold-metallic: #B8860B;
             --gold-border: rgba(184, 134, 11, 0.35);
             --gold-border-hover: rgba(245, 208, 97, 0.6);
-            
-            --text-primary: #E8E3D8;      /* 柔和的亮色文字 */
-            --text-secondary: #9C958A;    /* 次级文字 */
-            
+            --text-primary: #E8E3D8;
+            --text-secondary: #9C958A;
             --badge-bg: linear-gradient(90deg, rgba(184, 134, 11, 0.15) 0%, transparent 100%);
             --sub-border: rgba(255, 255, 255, 0.06);
             --shadow-gold: 0 0 20px rgba(184, 134, 11, 0.1);
             --shadow-gold-hover: 0 0 30px rgba(245, 208, 97, 0.2);
-            
             --icon-color: #F5D061;
-            
             --code-bg: #0D1117;
             --code-text: #C9D1D9;
             --warn-color: #FF7B72;
             --warn-bg: rgba(255, 123, 114, 0.1);
         }
 
-        /* 亮金色主题 - 点击后生效 */
         html[data-theme="light"] {
-            --bg-deep: #FDFBF7;           /* 极浅米金底色 */
-            --bg-panel: #FFFFFF;          /* 纯白面板 */
-            --bg-sub-item: #FFF9EC;       /* 浅金块 */
-            --bg-sub-item-hover: #FFF3D4; /* 悬停浅金块 */
-            
-            --gold-bright: #C28B00;       /* 亮金色变深，保证白底可见 */
-            --gold-metallic: #9A6E00;     /* 暗金色 */
+            --bg-deep: #FDFBF7;
+            --bg-panel: #FFFFFF;
+            --bg-sub-item: #FFF9EC;
+            --bg-sub-item-hover: #FFF3D4;
+            --gold-bright: #C28B00;
+            --gold-metallic: #9A6E00;
             --gold-border: rgba(194, 139, 0, 0.25);
             --gold-border-hover: rgba(194, 139, 0, 0.6);
-            
-            --text-primary: #2D261C;      /* 深褐文字 */
-            --text-secondary: #6B6355;    /* 灰褐次级文字 */
-            
+            --text-primary: #2D261C;
+            --text-secondary: #6B6355;
             --badge-bg: linear-gradient(90deg, rgba(194, 139, 0, 0.1) 0%, transparent 100%);
             --sub-border: rgba(0, 0, 0, 0.06);
             --shadow-gold: 0 4px 20px rgba(194, 139, 0, 0.08);
             --shadow-gold-hover: 0 10px 30px rgba(194, 139, 0, 0.15);
-            
             --icon-color: #9A6E00;
-            
             --code-bg: #F6F3EC;
             --code-text: #4A4133;
             --warn-color: #D93025;
             --warn-bg: rgba(217, 48, 37, 0.08);
         }
 
-        /* ================= 基础重置 ================= */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s ease, 
-                        color 0.3s ease, 
-                        border-color 0.3s ease,
-                        box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-deep);
-            /* 背景径向光晕，增强暗金色质感 */
-            background-image: 
+            background-image:
                 radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 50% 100%, rgba(184, 134, 11, 0.05) 0%, transparent 50%);
             color: var(--text-primary);
@@ -86,12 +68,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
-            -webkit-font-smoothing: antialiased;
+            padding: 60px 20px 40px;
             position: relative;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ================= 右上角功能区 ================= */
         .top-right-corner {
             position: absolute;
             top: 30px;
@@ -99,7 +80,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 100;
+            z-index: 10;
         }
 
         .author-badge {
@@ -122,7 +103,6 @@
             margin-left: 4px;
         }
 
-        /* 主题切换按钮 */
         .theme-toggle {
             background: var(--bg-panel);
             border: 1px solid var(--gold-border);
@@ -152,14 +132,11 @@
             fill: currentColor;
         }
 
-        /* 图标切换逻辑 */
         html[data-theme="dark"] .icon-sun { display: block; }
         html[data-theme="dark"] .icon-moon { display: none; }
-        
         html[data-theme="light"] .icon-sun { display: none; }
         html[data-theme="light"] .icon-moon { display: block; }
 
-        /* ================= 顶部标题 ================= */
         .header-section {
             text-align: center;
             margin-bottom: 60px;
@@ -179,7 +156,7 @@
         }
 
         .main-title {
-            font-size: 42px;
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 900;
             letter-spacing: 4px;
             background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-metallic) 100%);
@@ -197,7 +174,6 @@
             font-weight: 600;
         }
 
-        /* ================= 主干布局 ================= */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -207,7 +183,6 @@
             position: relative;
         }
 
-        /* ================= 模块卡片 ================= */
         .module-card {
             background: var(--bg-panel);
             border: 1px solid var(--gold-border);
@@ -255,12 +230,11 @@
             align-items: center;
             gap: 12px;
         }
-        
+
         .section-title span {
             color: var(--gold-bright);
         }
 
-        /* ================= 步骤列表 ================= */
         .step-list {
             list-style: none;
         }
@@ -282,7 +256,7 @@
             border-color: var(--gold-border-hover);
             transform: translateX(4px);
         }
-        
+
         .step-item::before {
             content: '';
             position: absolute;
@@ -321,7 +295,7 @@
         .step-content {
             flex: 1;
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-secondary);
         }
 
@@ -335,7 +309,6 @@
             font-weight: 700;
         }
 
-        /* ================= 代码块 ================= */
         .code-block {
             background: var(--code-bg);
             border: 1px solid var(--gold-border);
@@ -362,15 +335,14 @@
             margin: 0 4px;
         }
 
-        /* ================= 连接线 ================= */
         .flow-arrow {
             width: 2px;
             height: 30px;
             background: linear-gradient(180deg, var(--gold-border) 0%, var(--gold-metallic) 100%);
-            margin: -10px auto 0 auto;
+            margin: -10px auto 0;
             position: relative;
         }
-        
+
         .flow-arrow::after {
             content: '';
             position: absolute;
@@ -382,7 +354,6 @@
             border-top: 8px solid var(--gold-metallic);
         }
 
-        /* ================= 警示框 ================= */
         .alert-box {
             background: var(--warn-bg);
             border-left: 4px solid var(--warn-color);
@@ -401,12 +372,18 @@
             margin-bottom: 6px;
         }
 
-        /* ================= 响应式 ================= */
+        .footer-note {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            padding-top: 10px;
+        }
+
         @media (max-width: 768px) {
-            body { padding: 80px 15px 40px 15px; }
+            body { padding: 80px 15px 40px; }
             .top-right-corner { top: 20px; right: 20px; gap: 8px; }
             .author-badge { font-size: 11px; padding: 4px 8px; }
-            .main-title { font-size: 28px; letter-spacing: 2px; }
+            .main-title { letter-spacing: 2px; }
             .sub-title { font-size: 14px; }
             .module-card { flex-direction: column; }
             .letter-badge {
@@ -425,33 +402,25 @@
     </style>
 </head>
 <body>
-
-    <!-- 右上角功能区 -->
     <div class="top-right-corner">
         <div class="author-badge">JLL<span>_Trading</span></div>
-        <button class="theme-toggle" id="themeToggle" title="切换亮金色/暗金色">
-            <!-- 月亮图标 (亮色模式下显示，表示切换到暗色) -->
+        <button class="theme-toggle" id="themeToggle" title="切换亮金色/暗金色" aria-label="切换主题">
             <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
             </svg>
-            <!-- 太阳图标 (暗色模式下显示，表示切换到亮色) -->
             <svg class="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/>
             </svg>
         </button>
     </div>
 
-    <!-- 顶部标题 -->
     <header class="header-section">
         <h1 class="main-title">JLL · 全自动交易系统部署流程</h1>
         <p class="sub-title">从 0 到 1 跑通 OKX EMA 策略机器人</p>
     </header>
 
-    <!-- 主体内容 -->
-    <div class="container">
-
-        <!-- 阶段 A -->
-        <div class="module-card">
+    <main class="container">
+        <section class="module-card">
             <div class="letter-badge">A</div>
             <div class="content-area">
                 <div class="section-title">阶段一：<span>环境准备与服务器部署</span></div>
@@ -487,16 +456,15 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
         <div class="flow-arrow"></div>
 
-        <!-- 阶段 B -->
-        <div class="module-card">
+        <section class="module-card">
             <div class="letter-badge">B</div>
             <div class="content-area">
                 <div class="section-title">阶段二：<span>修改 JSON 配置（修正 8H 致命错误）</span></div>
-                
+
                 <div class="alert-box">
                     <strong>🚨 严重警告：OKX 根本没有 8 小时 K 线！</strong>
                     您原有的 <span class="tag">"bar": "8H"</span> 是非法配置。只要保留 8H，程序一启动就会报错退出（错误码 51000），绝对不会开单！OKX 仅支持：<span class="tag">1m</span> <span class="tag">5m</span> <span class="tag">15m</span> <span class="tag">1H</span> <span class="tag">4H</span> <span class="tag">6H</span> <span class="tag">12H</span> <span class="tag">1D</span> 等。
@@ -528,183 +496,150 @@
                     <li class="step-item">
                         <div class="step-num">3</div>
                         <div class="step-content">
-                            <strong>配置 Telegram（可选，但强烈建议）：</strong>去 TG 找 @BotFather 获取 token，找 @userinfobot 获取 chat_id，填入 JSON 的 <span class="tag">telegram</span> 字段，用于接收买卖通知和紧急清仓指令。
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-num">4</div>
-                        <div class="step-content">
-                            <strong>保持模拟运行：</strong>先保持 <span class="tag">"dry_run": true</span> 和 <span class="tag">"simulated_trading": true</span>。
+                            <strong>配置 Telegram（可选，但强烈建议）：</strong>在 Telegram 中创建 Bot，并记录 <span class="tag">bot_token</span> 与 <span class="tag">chat_id</span>，用于发送下单、交易日志和异常告警。
+                            <div class="code-block">
+"telegram_token": "你的BOT_TOKEN",<br>
+"telegram_chat_id": "你的CHAT_ID"
+                            </div>
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
         <div class="flow-arrow"></div>
 
-        <!-- 阶段 C -->
-        <div class="module-card">
+        <section class="module-card">
             <div class="letter-badge">C</div>
             <div class="content-area">
-                <div class="section-title">阶段三：<span>手动试跑与日志验证</span></div>
+                <div class="section-title">阶段三：<span>手动试跑与日志校验</span></div>
                 <ul class="step-list">
                     <li class="step-item">
                         <div class="step-num">1</div>
                         <div class="step-content">
-                            <strong>单次试跑：</strong>在宝塔终端执行：
-                            <div class="code-block">python3 okx_1k_bot.py -c btc.json --once</div>
-                            查看终端输出，如果看到 <span class="highlight-gold">[启动预检] K线接口正常</span>，说明 API 和网络通了。
+                            <strong>先试跑，不要直接开实盘：</strong>在服务器上执行 <span class="tag">python3 okx_1k_bot.py</span>，观察日志是否出现连接成功、订阅成功、读取行情成功等信息。
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-num">2</div>
                         <div class="step-content">
-                            <strong>查看日志：</strong>打开 <span class="tag">/www/okx_bot/btc.log</span>，确认日志里有：<br>
-                            <span class="tag">账户模式校验通过: posMode=net_mode</span><br>
-                            <span class="tag">杠杆已设置: BTC-USDT-SWAP 3x cross</span><br>
-                            如果报错，请参照日志修正。
+                            <strong>检查策略判断：</strong>确认程序能正确读取 K 线、计算 EMA、输出买卖信号，并且对时间周期和交易品种正确匹配。
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <strong>排查关键错误：</strong>如果你看到 <span class="tag">51000</span>、<span class="tag">Invalid bar</span>、<span class="tag">upstream connect error</span>，优先检查选项、权限、网络、IP 白名单和 JSON 结构。
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
         <div class="flow-arrow"></div>
 
-        <!-- 阶段 D -->
-        <div class="module-card">
+        <section class="module-card">
             <div class="letter-badge">D</div>
             <div class="content-area">
-                <div class="section-title">阶段四：<span>宝塔守护进程部署（常驻后台）</span></div>
+                <div class="section-title">阶段四：<span>后台进程部署</span></div>
                 <ul class="step-list">
                     <li class="step-item">
                         <div class="step-num">1</div>
                         <div class="step-content">
-                            <strong>安装 Python 项目管理器：</strong>在宝塔软件商店中搜索安装“Python 项目管理器”。
+                            <strong>使用守护进程：</strong>推荐使用 <span class="tag">screen</span> 或 <span class="tag">nohup</span>，保证程序不中断地持续运行。
+                            <div class="code-block">cd /www/okx_bot<br>nohup python3 okx_1k_bot.py > bot.log 2>&1 &</div>
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-num">2</div>
                         <div class="step-content">
-                            <strong>添加 BTC 项目：</strong><br>
-                            项目路径：<span class="tag">/www/okx_bot</span><br>
-                            启动文件：<span class="tag">okx_1k_bot.py</span><br>
-                            启动参数：<span class="tag">-c btc.json</span>
+                            <strong>日志文件：</strong>通过 <span class="tag">tail -f bot.log</span> 实时查看是否有异常、重连、订单下单或撤单记录。
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-num">3</div>
                         <div class="step-content">
-                            <strong>添加 ETH 项目（如需多币种）：</strong><br>
-                            项目路径、启动文件同上。<br>
-                            启动参数改为：<span class="tag">-c eth.json</span><br>
-                            * 引擎支持多实例，日志和状态文件会自动隔离（<span class="tag">btc.log</span> / <span class="tag">eth.log</span>）。
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-num">4</div>
-                        <div class="step-content">
-                            <strong>启动并开启自动重启：</strong>启动项目，并确保状态为“运行中”，勾选“自动重启”，实现 7x24 小时无人值守。
+                            <strong>定时检查：</strong>每日检查 VPS 负载、磁盘、网络和程序状态，避免脚本在后台失联导致错误累积。
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
         <div class="flow-arrow"></div>
 
-        <!-- 阶段 E -->
-        <div class="module-card">
+        <section class="module-card">
             <div class="letter-badge">E</div>
             <div class="content-area">
-                <div class="section-title">阶段五：<span>交易所与 TG 联调测试</span></div>
+                <div class="section-title">阶段五：<span>交易所与 Telegram 联调</span></div>
                 <ul class="step-list">
                     <li class="step-item">
                         <div class="step-num">1</div>
                         <div class="step-content">
-                            <strong>测试自动平仓：</strong>在 OKX App 里手动买入一点 BTC 现货/合约，看机器人是否会在 2 秒内自动将其平掉（按日线信号强行对齐）。
+                            <strong>绑定 OKX 账户：</strong>确认 API 权限正确，IP 白名单与服务器公网 IP 一致；若配置错误，程序会读取失败或拒绝下单。
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-num">2</div>
                         <div class="step-content">
-                            <strong>测试 TG 指令：</strong>在 Telegram 发送 <span class="tag">/status</span> 查看面板；发送 <span class="tag">/pause</span> 暂停交易；发送 <span class="tag">/panic_sell</span> 紧急清仓；发送 <span class="tag">/resume</span> 恢复。
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="flow-arrow"></div>
-
-        <!-- 阶段 F -->
-        <div class="module-card">
-            <div class="letter-badge">F</div>
-            <div class="content-area">
-                <div class="section-title">阶段六：<span>全面转实盘（最终确认）</span></div>
-                <div class="alert-box">
-                    <strong>🚨 实盘前，请务必对照图片中的 3 件事做最后核对：</strong>
-                </div>
-                <ul class="step-list">
-                    <li class="step-item">
-                        <div class="step-num">1</div>
-                        <div class="step-content">
-                            <strong>仓位模式：</strong>OKX 网页端 → 交易设置 → 仓位模式 → 选<strong>【单向持仓】</strong>（程序按 posSide=net 下单，双向模式会报错 51000）。
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-num">2</div>
-                        <div class="step-content">
-                            <strong>API 权限：</strong>确认 API 仅勾选【读取】+【交易】，<span class="highlight-gold">绝对不开提现</span>，且已绑定当前服务器 IP。
+                            <strong>Telegram 通知：</strong>建议每次下单、平仓、异常和重启都通过 Telegram 通知，提升运维可视性。
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-num">3</div>
                         <div class="step-content">
-                            <strong>账户模式：</strong>必须是合约模式（单币种保证金/跨币种/组合），现货简单模式下 <span class="tag">acctLv=1</span> 不能交易合约。
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-num">4</div>
-                        <div class="step-content">
-                            <strong>关闭模拟：</strong>在 JSON 中将 <span class="tag">"dry_run": false</span> 和 <span class="tag">"simulated_trading": false</span>。
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-num">5</div>
-                        <div class="step-content">
-                            <strong>重启进程：</strong>在宝塔 Python 项目管理器中，点击重启 BTC 和 ETH 项目。系统正式进入实盘自动交易状态！
+                            <strong>风控首要：</strong>设置最小资金阈值、最大单笔金额、亏损强制停机与人工确认机制，避免系统失控。
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-    </div>
+        <div class="flow-arrow"></div>
 
-    <!-- 脚本：主题切换核心逻辑 -->
+        <section class="module-card">
+            <div class="letter-badge">F</div>
+            <div class="content-area">
+                <div class="section-title">阶段六：<span>实盘前检查清单</span></div>
+                <ul class="step-list">
+                    <li class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <strong>确认配置无误：</strong>检查 <span class="tag">inst_id</span>、<span class="tag">bar</span>、<span class="tag">ema_period</span>、API Key、Secret、Passphrase 和 Telegram 配置是否全部正确。
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <strong>确认资金与仓位：</strong>用极小仓位测试程序是否会开单、平仓和发送通知，确保不会在不必要的情况下触发真实交易。
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <strong>保留人工停止渠道：</strong>如果行情异常或程序逻辑偏离预期，必须能在 1–2 分钟内停掉策略，避免长期无监控运行。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="footer-note">JLL Trading · 仅用于技术学习与部署说明，不构成任何投资建议。</div>
+    </main>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toggleBtn = document.getElementById('themeToggle');
-            var htmlEl = document.documentElement; // 直接操作 html 标签上的 data-theme 属性
+        const root = document.documentElement;
+        const toggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('jll-theme');
 
-            // 1. 初始化：检查本地存储
-            var savedTheme = localStorage.getItem('jll-theme');
-            if (savedTheme === 'light') {
-                htmlEl.setAttribute('data-theme', 'light');
-            } else {
-                htmlEl.setAttribute('data-theme', 'dark'); // 默认暗金
-            }
+        if (savedTheme) {
+            root.setAttribute('data-theme', savedTheme);
+        }
 
-            // 2. 点击事件：切换属性并保存
-            toggleBtn.addEventListener('click', function() {
-                var currentTheme = htmlEl.getAttribute('data-theme');
-                var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                htmlEl.setAttribute('data-theme', newTheme);
-                localStorage.setItem('jll-theme', newTheme);
-            });
+        toggle.addEventListener('click', () => {
+            const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            localStorage.setItem('jll-theme', next);
         });
     </script>
 </body>
